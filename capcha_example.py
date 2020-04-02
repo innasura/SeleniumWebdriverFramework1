@@ -2,7 +2,6 @@ import time
 from python_rucaptcha import ReCaptchaV2
 from selenium import webdriver
 
-
 def timing(str):
     named_tuple = time.localtime()  # get struct_time
     time_string = time.strftime("%m/%d/%Y, %H:%M:%S", named_tuple)
