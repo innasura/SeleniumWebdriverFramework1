@@ -21,7 +21,6 @@ class ChromeSubmitForm(unittest.TestCase):
             'resolution': '1024x768',
             'name': 'Bstack-[Python]-CARealEstate_Chrome1'
         }
-
         url = my_url.bs_url
         desired_cap['acceptSslCerts'] = True
         self.driver = webdriver.Remote(command_executor=url, desired_capabilities=desired_cap)
@@ -31,9 +30,9 @@ class ChromeSubmitForm(unittest.TestCase):
     def test_submit_form_chrome(self):
         driver = self.driver
         driver_chrome = self.driver
-        driver_chrome.get('https://qasvus.wordpress.com')
+        driver_chrome.get(my_url.site_url)  ## https://qasvus.wordpress.com
         wait = WebDriverWait(driver, 3)
-        wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@class='pushbutton-wide']")))
+        wait.until(EC.visibility_of_element_located((By.XPATH, my_url.submit_btn_xpath)))
         time.sleep(1)  # simulate long running test
 
         assert "California Real Estate" in driver.title
@@ -57,8 +56,8 @@ class ChromeSubmitForm(unittest.TestCase):
         # Use "try/except" method to wait "go back" link is VISIBLE and click it after
         try:
             WebDriverWait(driver, 10) \
-                .until(EC.visibility_of_element_located((By.XPATH, "//a[contains(text(),'go back')]")))
-            element = driver.find_element(By.XPATH, "//a[contains(text(),'go back')]")
+                .until(EC.visibility_of_element_located((By.XPATH, my_url.goback_xpath)))
+            element = driver.find_element(By.XPATH, my_url.goback_xpath)
             driver.execute_script("arguments[0].click();", element)
             print("The form is submitted!")
         except TimeoutException:
@@ -66,13 +65,13 @@ class ChromeSubmitForm(unittest.TestCase):
 
         # Use "wait.until" method for visibility of all 4 houses images on the main page
         WebDriverWait(driver, 10) \
-            .until(EC.visibility_of_element_located((By.XPATH, "//img[@class='wp-image-55']")))
+            .until(EC.visibility_of_element_located((By.XPATH, my_url.image1_xpath)))
         WebDriverWait(driver, 10) \
-            .until(EC.visibility_of_element_located((By.XPATH, "//img[@class='wp-image-34']")))
+            .until(EC.visibility_of_element_located((By.XPATH, my_url.image2_xpath)))
         WebDriverWait(driver, 10) \
-            .until(EC.visibility_of_element_located((By.XPATH, "//img[@class='wp-image-56']")))
+            .until(EC.visibility_of_element_located((By.XPATH, my_url.image3_xpath)))
         WebDriverWait(driver, 10) \
-            .until(EC.visibility_of_element_located((By.XPATH, "//img[@class='wp-image-30']")))
+            .until(EC.visibility_of_element_located((By.XPATH, my_url.image4_xpath)))
 
         # Do assertion for page title and print it with custom string
         assert "California Real Estate" in driver.title
@@ -94,7 +93,6 @@ class FirefoxSubmitButton(unittest.TestCase):
             'resolution': '1024x768',
             'name': 'Bstack-[Python]-CARealEstate_Firefox1'
         }
-
         url = my_url.bs_url
         desired_cap['acceptSslCerts'] = True
         self.driver = webdriver.Remote(command_executor=url, desired_capabilities=desired_cap)
@@ -104,9 +102,9 @@ class FirefoxSubmitButton(unittest.TestCase):
     def test_submit_button_firefox(self):
         driver = self.driver
         driver_ff = self.driver
-        driver_ff.get('https://qasvus.wordpress.com')
+        driver_ff.get(my_url.site_url)  ## https://qasvus.wordpress.com
         wait = WebDriverWait(driver, 3)
-        wait.until(EC.visibility_of_element_located((By.XPATH, "//button[@class='pushbutton-wide']")))
+        wait.until(EC.visibility_of_element_located((By.XPATH, my_url.submit_btn_xpath)))
         time.sleep(1)  # simulate long running test
 
         assert "California Real Estate" in driver.title
@@ -130,8 +128,8 @@ class FirefoxSubmitButton(unittest.TestCase):
         # Use "try/except" method to wait "go back" link is VISIBLE and click it after
         try:
             WebDriverWait(driver, 10) \
-                .until(EC.visibility_of_element_located((By.XPATH, "//a[contains(text(),'go back')]")))
-            element = driver.find_element(By.XPATH, "//a[contains(text(),'go back')]")
+                .until(EC.visibility_of_element_located((By.XPATH, my_url.goback_xpath)))
+            element = driver.find_element(By.XPATH, my_url.goback_xpath)
             driver.execute_script("arguments[0].click();", element)
             print("The form in Firefox is submitted!")
         except TimeoutException:
@@ -139,13 +137,13 @@ class FirefoxSubmitButton(unittest.TestCase):
 
         # Use "wait.until" method for visibility of all 4 houses images on the main page
         WebDriverWait(driver, 10) \
-            .until(EC.visibility_of_element_located((By.XPATH, "//img[@class='wp-image-55']")))
+            .until(EC.visibility_of_element_located((By.XPATH, my_url.image1_xpath)))
         WebDriverWait(driver, 10) \
-            .until(EC.visibility_of_element_located((By.XPATH, "//img[@class='wp-image-34']")))
+            .until(EC.visibility_of_element_located((By.XPATH, my_url.image2_xpath)))
         WebDriverWait(driver, 10) \
-            .until(EC.visibility_of_element_located((By.XPATH, "//img[@class='wp-image-56']")))
+            .until(EC.visibility_of_element_located((By.XPATH, my_url.image3_xpath)))
         WebDriverWait(driver, 10) \
-            .until(EC.visibility_of_element_located((By.XPATH, "//img[@class='wp-image-30']")))
+            .until(EC.visibility_of_element_located((By.XPATH, my_url.image4_xpath)))
 
         # Do assertion for page title and print it with custom string
         assert "California Real Estate" in driver.title
